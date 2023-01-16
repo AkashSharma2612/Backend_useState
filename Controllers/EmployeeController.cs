@@ -19,20 +19,19 @@ namespace Employee_Department.Controllers
         }
         [HttpGet]
         public IActionResult GetEmployees()
-       {
+        {
             var employeeList = _context.Employees.ToList();
             return Ok(employeeList);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveEmployee([FromBody] List<Employee> employee)
+        public async Task<IActionResult> SaveEmployee([FromBody] IList<Employee> employee)
         {
            
                 foreach (Employee emp in employee)
-            {
+                {
                 await _context.Employees.AddAsync(emp);
                 _context.SaveChanges();
-
-            }
+                }
             
             return Ok(new { message = "data Saved" });
         }
